@@ -1,0 +1,141 @@
+
+\documentclass[runningheads,a4paper,11pt]{report}
+
+\usepackage{algorithmic}
+\usepackage{algorithm} 
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{caption}
+\usepackage{comment} 
+\usepackage{epsfig} 
+\usepackage[T1]{fontenc}
+\usepackage{geometry} 
+\usepackage{graphicx}
+\usepackage[dvipdfm,colorlinks]{hyperref} 
+\usepackage[latin1]{inputenc}
+\usepackage{multicol}
+\usepackage{multirow} 
+\usepackage{rotating}
+\usepackage{setspace}
+\usepackage{subfigure}
+\usepackage{url}
+\usepackage{verbatim}
+
+\geometry{a4paper,top=3cm,left=2cm,right=2cm,bottom=3cm}
+
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+
+\hypersetup{
+pdftitle={artTitle},
+pdfauthor={name},
+pdfkeywords={pdf, latex, tex, ps2pdf, dvipdfm, pdflatex},
+bookmarksnumbered,
+pdfstartview={FitH},
+urlcolor=cyan,
+colorlinks=true,
+linkcolor=red,
+citecolor=green,
+}
+\pagestyle{plain}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\linespread{1}
+
+\pagestyle{myheadings}
+
+\makeindex
+
+
+\begin{document}
+
+\begin{titlepage}
+\sloppy
+\begin{center}
+BABE\c S BOLYAI UNIVERSITY, CLUJ NAPOCA, ROM\^ ANIA
+
+FACULTY OF MATHEMATICS AND COMPUTER SCIENCE
+
+SPECIALIZATION SOFTWARE ENGINEERING 
+
+\vspace{5cm}
+
+\Huge \textbf{Tracking progress of rehabilitation therapy using AI}
+
+\vspace{1cm}
+
+\normalsize -- Research Project --
+
+\end{center}
+
+
+\vspace{5cm}
+
+\begin{flushleft}
+\textbf{Supervisor} \break
+\Large{\textbf{Lect. Dr. Ioan Lazăr}}
+\end{flushleft}
+
+\begin{flushright}
+\textbf{Author} \break
+\Large{\textbf{Razvan Timis}}
+\end{flushright}
+
+\vspace{4cm}
+
+\begin{center}
+2019
+\end{center}
+
+\end{titlepage}
+
+\pagenumbering{gobble}
+
+\renewcommand{\contentsname}{Table of Contents}
+\tableofcontents
+
+% \newpage
+
+% \listoftables
+% \listoffigures
+% \listofalgorithms
+
+\newpage
+
+\setstretch{1.5}
+
+\begin{abstract}
+\par In Physiotherapy, tracking Range of Motion (ROM) is a standard approach to measuring progress in patient therapy. Often, ROM is measured subjectively and documentation is inconsistent between clinicians.
+\par Physios might come to wrong conclusions if ROM is tracked incorrectly between therapy sessions.
+\par The problem is that up to 70\% of patients give up physiotherapy because they can not see immediate results.
+\par That's why we want to make a mobile application which makes use of a phone camera to objectively calculate ROM in real-time and automatically produce a report that tracks progress over the course of several therapy sessions.
+In Physiotherapy, tracking Range of Motion (ROM) is a standard approach to measuring progress in patient therapy. Often, ROM is measured subjectively and documentation is inconsistent between clinicians. Physios might come to wrong conclusions if ROM is tracked incorrectly between therapy sessions.
+The problem is that up to 70\% of patients give up physiotherapy because they can not see immediate results.\break
+That's why we want to make a mobile application which makes use of a phone camera to objectively calculate ROM in real-time and automatically produce a report that tracks progress over the course of several therapy sessions.
+In Physiotherapy, tracking Range of Motion (ROM) is a standard approach to measuring progress in patient therapy. Often, ROM is measured subjectively and documentation is inconsistent between clinicians. Physios might come to wrong conclusions if ROM is tracked incorrectly between therapy sessions.
+The problem is that up to 70\% of patients give up physiotherapy because they can not see immediate results.\break
+That's why we want to make a mobile application which makes use of a phone camera to objectively calculate ROM in real-time and automatically produce a report that tracks progress over the course of several therapy sessions.
+
+\end{abstract}
+
+\newpage
+
+\pagenumbering{arabic}
+
+\chapter{Introduction}
+
+
+\chapter{Related work}
+
+
+\bibliographystyle{plain}
+\bibliography{BibAll}
+\end{document}
