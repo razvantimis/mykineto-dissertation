@@ -93,15 +93,100 @@ the output layer provides us with the information we expect. \cite{book.neuronal
 
 \begin{figure}[htbp]
 	\centerline{\includegraphics[scale=0.75]{fig/neuronal-network.png}}  
-	\caption{Feedforward neural network  \cite{book.neuronal.network.1995}}
+  \caption{Feedforward neural network  \cite{book.neuronal.network.1995}}
+  \label{fig:feedforward}
 \end{figure}
 
-In Figure 2.2 shows a neural network of the three-layer feed-forward type, which has links between the neurons in one direction,
+In Figure \ref{fig:feedforward} shows a neural network of the three-layer feed-forward type, which has links between the neurons in one direction,
 because the cycles in such a network are missing, 
 the calculation can continue evenly from the input nodes to the exit ones \cite{book.neuronal.network.1995}.
 
+We can say that everything is summed up to the calculations of a value using input values, weights on each layer,
+and activation function, most of the times it is difficult to choose the activation function or other parameters that make the performance of a network increase.
 
-\subsection{Back propagation algorithm}
+If we compare the human brain to such a network, we can see that some regions in the brain are feed-forware, but others do not, with quick back links. 
+Then we can say that the human brain is closer to recurrent networks. \cite{book.neuronal.network.1995}.
+
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.75]{fig/reatea-recurenta.png}}  
+  \caption{Recurrent Networks - Hopfield  \cite{book.neuronal.network.1995}}
+  \label{fig:hopfield}
+  
+\end{figure}
+
+\par The best-understood neural networks of the recurrent type are thought to be Hopfield networks.
+ Figure \ref{fig:hopfield} shows such a network. It can be observed that they use bidirectional connections between neurons, 
+ the weights of the neurons being symmetrical. Besides, all layers in the network are both input and output, and the activation function is the sign function. 
+Such a network functions as an associative memory.
+
+Regarding the structure of the network, sometimes the performance of the network is very much dependent on this, 
+because if we choose the wrong structure of a network then its performance will be poor. For example, if we choose a network too small, 
+the mathematical model will not be representative of the training data,
+ and if we choose too much a network, it will learn the training data well, memorizing them but will not be able to generalize the new entries. \cite{book.neuronal.network.1995}
+
+
+ \begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.75]{fig/un-neuron.png}}  
+  \caption{An artificial neuron  \cite{book.neuronal.network.1995}}
+  \label{fig:anneuron}
+  
+\end{figure}
+
+On top we will describe how a neuron works. Each neuron is connected to other neurons, 
+some of them being input and others output, they make a relatively simple calculation, 
+this computation being divided into two components, one linear and another non-linear. 
+The first is a weighted sum of the input values in the neuron, this is the linear component and the 
+second component is represented by the activation function, g, $a_i$
+it converts the weighted sum to the final value, which then serves as an activation value units,
+ most of the times the entire network uses the same activation function \cite{book.neuronal.network.1995}. 
+
+
+ There are different models for the activation function, but only three of them are the most used, step function,
+  sign and sigmoid, shown in Figure \ref{fig:activation-fun}. These activation functions allow the network to model nonlinear relationships between input parameters and output values. The step function returns the values according to a threshold t if the value is greater than the return threshold 1 and otherwise 0. There is also a biological motivation for this function, 1 represents the transmission of the nerve impulse and 0 the transmission failure.
+
+\begin{figure}[htbp]
+  \centerline{\includegraphics[scale=0.75]{fig/activation-fun.png}}  
+  \caption{Activation functions \cite{book.neuronal.network.1995}}
+  \label{fig:activation-fun}
+\end{figure}
+  Another important issue is networking,
+   their ability to learn by interacting with the environment is the main feature of the neural network. 
+   One of the most popular algorithms is backpropagation. 
+   We dedicated a special section below for the backpropagation algorithm. The idea behind learning algorithms is based on updating the weights, 
+   if there is an error between the output of the network and the value we expect then it is updated
+   weights so as to reduce the error, dividing it equally between weights.
+\subsection{Backpropagation algorithm}
+
+It was discovered for the first time by Bryson Si Ho in 1969, 
+since the beginning could not be used due to the large computational requirements. \cite{book.neuronal.network.1995}
+
+This algorithm is based on updating the weights, trying to minimize the error between each calculated output value and the expected value. This process is done by propagating back errors.
+ To update the weights, the derived activation function is used.
+
+This weights update process is repeated for all drive data trying to get as little error as possible.
+
+
+\begin{figure}[htbp]
+  \centerline{\includegraphics[scale=0.45]{fig/neuronal-network-backpropagation.png}}  
+  \caption{Multilayered network \cite{book.neuronal.network.1995}}
+  \label{fig:neuronal-network-backpropagation}
+\end{figure}
+
+Starting from the idea of updating the weights between the layers. 
+Between the exit entrance and the hidden layer, noted $W_{i,j}$,  we will use the formula 
+$W^{'}_{j,i} = W_{j,i} + r \times \Delta_i^{ouput} \times O_i$, where $r$ is learning rate 
+and $\Delta_i^{ouput}$ is calculated by using the formula $\Delta_i^{ouput} = Err_i  \times g_{'}(O_i)$
+
+Now we can calculation of errors by the formula $Err_i = T_i + O_i$, where $O_i$ is output value and $T_i$ is a expected value.
+
+Next we will need to update weights from the next layer using $W^{'}_{k,j} = W_{k,j} + r \times \Delta_j^{hidden} \times I_k$ where 
+$\Delta_j^{hidden} = r  \times \Delta_j^{output} \times  a_j$.
+
+Backpropagation is used by computers to learn from their mistakes and 
+get better at doing a specific thing, above I described this process.
+So using this computer can keep guessing and
+get better and better at guessing like humans do at one particular task.
+
 
 \section{Convolutional Neural Network}
 \subsection{What is differente?}
