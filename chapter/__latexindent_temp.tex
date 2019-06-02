@@ -144,21 +144,78 @@ it converts the weighted sum to the final value, which then serves as an activat
  There are different models for the activation function, but only three of them are the most used, step function,
   sign and sigmoid, shown in Figure \ref{fig:activation-fun}. These activation functions allow the network to model nonlinear relationships between input parameters and output values. The step function returns the values according to a threshold t if the value is greater than the return threshold 1 and otherwise 0. There is also a biological motivation for this function, 1 represents the transmission of the nerve impulse and 0 the transmission failure.
 
-  \begin{figure}[htbp]
-    \centerline{\includegraphics[scale=0.75]{fig/activation-fun.png}}  
-    \caption{Activation functions \cite{book.neuronal.network.1995}}
-    \label{fig:activation-fun}
-    
-  \end{figure}
+\begin{figure}[htbp]
+  \centerline{\includegraphics[scale=0.75]{fig/activation-fun.png}}  
+  \caption{Activation functions \cite{book.neuronal.network.1995}}
+  \label{fig:activation-fun}
+\end{figure}
   Another important issue is networking,
    their ability to learn by interacting with the environment is the main feature of the neural network. 
-   One of the most popular algorithms is back-propagation. 
-   We dedicated a special section below for the backpropagation algorithm. The idea behind learning algorithms is based on updating the weights, if there is an error between the output of the network and the value we expect, then weigh the weight so that it reduces the error, dividing it equally between the weights.
+   One of the most popular algorithms is backpropagation. 
+   We dedicated a special section below for the backpropagation algorithm. The idea behind learning algorithms is based on updating the weights, 
+   if there is an error between the output of the network and the value we expect then it is updated
+   weights so as to reduce the error, dividing it equally between weights.
+\subsection{Backpropagation algorithm}
 
-\subsection{Back propagation algorithm}
+It was discovered for the first time by Bryson Si Ho in 1969, 
+since the beginning could not be used due to the large computational requirements. \cite{book.neuronal.network.1995}
+
+This algorithm is based on updating the weights, trying to minimize the error between each calculated output value and the expected value. This process is done by propagating back errors.
+ To update the weights, the derived activation function is used.
+
+This weights update process is repeated for all drive data trying to get as little error as possible.
+
+
+\begin{figure}[htbp]
+  \centerline{\includegraphics[scale=0.45]{fig/neuronal-network-backpropagation.png}}  
+  \caption{Multilayered network \cite{book.neuronal.network.1995}}
+  \label{fig:neuronal-network-backpropagation}
+\end{figure}
+
+Starting from the idea of updating the weights between the layers. 
+Between the exit entrance and the hidden layer, noted $W_{i,j}$,  we will use the formula 
+$W^{'}_{j,i} = W_{j,i} + r \times \Delta_i^{ouput} \times O_i$, where $r$ is learning rate 
+and $\Delta_i^{ouput}$ is calculated by using the formula $\Delta_i^{ouput} = Err_i  \times g_{'}(O_i)$
+
+Now we can calculation of errors by the formula $Err_i = T_i + O_i$, where $O_i$ is output value and $T_i$ is a expected value.
+
+Next we will need to update weights from the next layer using $W^{'}_{k,j} = W_{k,j} + r \times \Delta_j^{hidden} \times I_k$ where 
+$\Delta_j^{hidden} = r  \times \Delta_j^{output} \times  a_j$.
+
+Backpropagation is used by computers to learn from their mistakes and 
+get better at doing a specific thing, above I described this process.
+So using this computer can keep guessing and
+get better and better at guessing like humans do at one particular task.
+
 
 \section{Convolutional Neural Network}
-\subsection{What is differente?}
+In this section we discuss the main notions that occur in 
+a neural convolution network that is a  kind of neural network but they are capable of processing large amounts of data such as images.
+The name "convolutional neural network" indicates that the convolution mathematical operation is used. 
+Convolution is a mathematical operation on two functions (f and g) to produce a third function. \cite{Mallat:2008:WTS:1525499}
+
+In this thesis we will focus on using CNN on images, more precisely on the image classifications.
+For example, if we want to classify pictures with dogs and cats,
+the algorithm will receive an image as input data.
+The algorithm interprets the input image as a pixel array, like in Figure \ref{fig:img-rgb}.
+
+\begin{figure}[htbp]
+  \centerline{\includegraphics[scale=0.75]{fig/img-rgb.png}}  
+  \caption{Array of RGB Matrix}
+  \label{fig:img-rgb}
+\end{figure}
+
+Next, we will need to define the layers of the network, 
+which can be of several kinds: convolution layers with filters , pooling layers and fully connected layers (FC)
+and the last time we will apply Softmax function to classify.
+ Each image will pass through these layers to be classified in one of the two categories.
+
+\subsection{Convolution Layer}
+\subsection{Strides}
+\subsection{Non Linearity (ReLU)}
+\subsection{Padding}
+\subsection{Pooling Layer}
+\subsection{Fully Connected Layer}
 
 
 % \section{The purpose of the application}

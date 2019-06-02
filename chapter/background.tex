@@ -189,7 +189,47 @@ get better and better at guessing like humans do at one particular task.
 
 
 \section{Convolutional Neural Network}
-\subsection{What is differente?}
+In this section we discuss the main notions that occur in 
+a neural convolution network that is a  kind of neural network but they are capable of processing large amounts of data such as images.
+The name "convolutional neural network" indicates that the convolution mathematical operation is used. 
+Convolution is a mathematical operation on two functions (f and g) to produce a third function. \cite{Mallat:2008:WTS:1525499}
+
+In this thesis we will focus on using CNN on images, more precisely on the image classifications.
+For example, if we want to classify pictures with dogs and cats,
+the algorithm will receive an image as input data.
+The algorithm interprets the input image as a pixel array, like in Figure \ref{fig:img-rgb}.
+
+\begin{figure}[htbp]
+  \centerline{\includegraphics[scale=0.75]{fig/img-rgb.png}}  
+  \caption{Array of RGB Matrix}
+  \label{fig:img-rgb}
+\end{figure}
+
+Next, we will need to define the layers of the network, 
+which can be of several kinds: convolution layers with filters , pooling layers and fully connected layers (FC)
+and the last time we will apply Softmax function to classify.
+ Each image will pass through these layers to be classified in one of the two categories.
+
+
+ \begin{figure}[htbp]
+  \centerline{\includegraphics[scale=0.35]{fig/cnn.jpeg}}  
+  \caption{Neural network with many convolutional layers \cite{cnn-mathworks}}
+  \label{fig:cnn-arhitecture}
+\end{figure}
+
+
+
+\subsection{Convolution Layer}
+
+
+Convolution is the first layer to extract features from an input image.
+ Convolution preserves the relationship between pixels by learning image features using small squares of input data.
+ It is a mathematical operation that takes two inputs such as image matrix and a filter or kernal
+\subsection{Strides}
+\subsection{Non Linearity (ReLU)}
+\subsection{Padding}
+\subsection{Pooling Layer}
+\subsection{Fully Connected Layer}
 
 
 % \section{The purpose of the application}
