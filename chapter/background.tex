@@ -253,11 +253,58 @@ imagine with a dog, Figure \ref{fig:exemple-dog-convolution}.
 \end{figure}
 Convolution of a different image filter can extract different features that help to better learn the neural network,
  extracting features related to edge detection, blur and sharpening.
-\subsection{Strides}
-\subsection{Non Linearity (ReLU)}
-\subsection{Padding}
+
+ For example, to create a convolution layer with tensorflow, use the syntax:
+
+ \begin{lstlisting}
+  conv_1 = tf.nn.conv2d(input, filter, strides=1, padding='SAME')
+ \end{lstlisting}
+ Stride is the number of pixels shifts over the input matrix.
+ In the case above, initializing stride 1 means moving the filter with one pixel at a time.
+ And if we initialize stride 2 then the filter will be moved by 2 pixels.
+
+ Another parameter that can be seen is padding. There are two types of padding, valid and same.
+ If padding is the same, then the result of the convolution operation will be as large as the input data.
+ We say that all the pixels in the image will be passed through the convolution operation
+
+ Valid padding which keeps only valid part of the image means 
+ this operation drop a part of imagine, where the filter did not fit.
+
+ Convolution layers are subject to an activation function to ensure nonlinear network behavior. 
+ As an activation function, ReLU (Rectified Linear Unit) is often used. Figure \ref{fig:relu-exemple}
+  illustrates the result of applying the ReLU function to a feature map.
+
+  \begin{figure}[htbp]
+    \centerline{\includegraphics[scale=0.75]{fig/relu.png}}  
+    \caption{Applying Rectified Linear Unit to a feature map}
+    \label{fig:relu-exemple}
+  \end{figure}
+
 \subsection{Pooling Layer}
+
+Just like strides, pooling is another way of reducing the dimensionality of a layer.
+Depending on the task, one may choose from different pooling methods.
+Similar to convolution operation, pooling methods also
+work with patches and strides. 
+
+
+\textbf{Max Pooling} will calculate the maximum value in a channel within the patch.
+
+\textbf{Average Pooling} will calculate the average value in a channel within the patch.
+
+\textbf{Sum Pooling} will calculate the sum from a channel within the patch.
+
+
+\begin{figure}[htbp]
+  \centerline{\includegraphics[scale=0.75]{fig/max-pooling.png}}  
+  \caption{Max pooling}
+  \label{fig:max-pooling}
+\end{figure}
+
+For exemple in Figure \ref{fig:max-pooling} we can see how max pooling work.
+Here we will see three types of pooling layers.
+
+
+
 \subsection{Fully Connected Layer}
 
-
-% \section{The purpose of the application}

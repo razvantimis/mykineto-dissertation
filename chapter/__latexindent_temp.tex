@@ -223,7 +223,8 @@ and the last time we will apply Softmax function to classify.
 
 Convolution operation take two inputs: imagine matrix, filter matrix.  
 For exemple if we have a imagine 5 x 5 x 3 with a dog and apply convolution operation with filter matrix like in Figure \ref{fig:exemple-2d-convolution},  we will get the feature map but how?
-Convolution operation first creates a sliding window of size $K \times K \times m(k−1)$ that goes through height and width dimensions of input imagine and every pixel is multipler with filter matrix and result a feature. \cite{Mallat:2008:WTS:1525499}
+Convolution operation first creates a sliding window of size $K \times K \times m \times (k-1)$ that goes through height and width dimensions of input imagine 
+and every pixel is multipler with filter matrix and result a feature. \cite{Mallat:2008:WTS:1525499}
 
  \begin{figure}[htbp]
   \centerline{\includegraphics[scale=0.45]{fig/convolution+op.PNG}}  
@@ -232,7 +233,9 @@ Convolution operation first creates a sliding window of size $K \times K \times 
 \end{figure}
 
 Depending on the type of filter applied during the convolution operation, it leads to obtaining different feature map.
-For example, by applying a convolution operation to  a image with a dog  using the matrix in Figure \ref{fig:edge-detection-filter} ,operation gives a feature map what describing the edges of the imagine with a dog, Figure \ref{fig:exemple-dog-convolution}.
+For example, by applying a convolution operation to  a image with a dog  using the matrix 
+in Figure \ref{fig:edge-detection-filter} ,operation gives a feature map what describing the edges of the 
+imagine with a dog, Figure \ref{fig:exemple-dog-convolution}.
 
  \begin{figure}[htbp]
   $$\begin{bmatrix}
@@ -245,13 +248,20 @@ For example, by applying a convolution operation to  a image with a dog  using t
 \end{figure}
  \begin{figure}[htbp]
   \centerline{\includegraphics[scale=0.45]{fig/con-dog.PNG}}  
-  \caption{Apply convolution on dog imagine \cite{Mallat:2008:WTS:1525499}}
+  \caption{Apply convolution on imagine with dog \cite{Mallat:2008:WTS:1525499}}
   \label{fig:exemple-dog-convolution}
 \end{figure}
-Convolution of a different image filter can extract different features that help to better learn the neural network, extracting features related to edge detection, blur and sharpening.
-\subsection{Strides}
-\subsection{Non Linearity (ReLU)}
-\subsection{Padding}
+Convolution of a different image filter can extract different features that help to better learn the neural network,
+ extracting features related to edge detection, blur and sharpening.
+
+ For example, to create a convolution layer with tensorflow, use the syntax:
+ \begin{lstlisting}
+  conv_1 = tf.nn.conv2d(input, filter, strides=1, padding='SAME')
+ \end{lstlisting}
+Strides
+Non Linearity (ReLU)
+Padding
+
 \subsection{Pooling Layer}
 \subsection{Fully Connected Layer}
 
