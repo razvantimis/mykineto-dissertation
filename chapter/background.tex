@@ -308,3 +308,15 @@ Here we will see three types of pooling layers.
 
 \subsection{Fully Connected Layer}
 
+As the name suggests, each node in the layer must be connected to 
+each node so we can say that fully connected is actually like a neural network.
+Within this layer the classification is made, so as input to this layer are provided feature maps 
+and on the output data the softmax activated function is applied.
+
+The output of this layer is a probability vector with a number of components equal to the number of classes.
+Each component of the vector represents
+the probability that the input image will fit into the appropriate class.
+
+In Figure \ref{fig:cnn-arhitecture} you can see this process, 
+the first map matrix will be converted as vector and fully connected layers combined these features together to create a model.
+After applying the softmax function to get the probabilities. 
