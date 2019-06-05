@@ -1,23 +1,94 @@
 
-\chapter{MyKineto - System architecture and specifications}
+\chapter{System architecture and specifications}
 
-\par My Kineto application is an interactive software destined for patients who need physiotherapy treatments. Our application guide patient to see how they need to make their exercises in a correct manner by showing Range of Motion (ROM) in real time and after allowing us to report on these dates for motivation patient. Also, the application count the number of movements. It is based on exercices, because we think that a constant and correct number of movements could be more efficient for patients then just to present them what exercices they need to do. In this manner the application guides each patient during the all period they need to follow their treatment. 
-
-\section{Specification of the problem}
-
+% În acest capitol vom începe prin a descrie care sunt obiectivele sistemului prezentat în această lucrare. 
+% Continuand cu o comparatie a celor doua tipuri de arhitecturi folosite in sistemului de urmărire partilor corpului, 
+% precum și detalile 
+% de implementare a celor doua aplicati dezvoltate. Totodată vom pune în evidența care sunt capabilitățile aplicației.
+In this chapter we will begin by describing the objectives 
+of the system presented in this paper. Continuing with a comparison of the two types of architectures used 
+in the body tracking system, as well as the implementation details of the two developed applications.
+ At the same time, we will highlight the capabilities of the application.
 
 \section{Goals}
+
 \par Our motivation is to help patients who need physiotherapy to see a progress and to encourage them to be 
 constant during their treatment. We want to support patients motivation in continuing to build new and 
- healthy behaviours. 
-\par This application is designed to help everyone who need physiotherapy treatment to stay motivated,
- reach their goals, and create habits that are healthy and helpful for a long term. 
- In this case we have a solution by creating a app which will be a useful tool for patients who needs help 
- to reach their goals by automated tracking of ROM.
+ healthy behaviours. But also helping Physiotherapist in evaluation of patient.
+
+% Obiectivul principal este cel de a urmari pacientul in timp ce isi face exerciti 
+% ca sa ajutam kinetoterapeutul in evaluare pacientului si sa motivam pacientul prin raportarea progresului. 
+The primary objective is to track the patient while he doing exercise to help 
+the physical therapist in evaluation of patient and to motivate the patient by reporting progress.
+
+% In acest sens am implementat peste algoritmul de estimare a posturi cele doua abordari detaliate in introducerea lucrari,
+%   cel care caulculeaza rang of motion si calcularea distantelor pentru afisarea progresului pacientului.
+
+In this case, we implemented the pose estimation algorithm, 
+the two approaches detailed in the introduction of the papers, 
+the one that calculate Range of Motion  and the calculation of the distances for display the progress of the patient
+
+% Dar pentru realizarea acestui obiectiv avem nevoie ca algoritmul de estimare a posturi sa aiba o performanta de minim 30 fps
+% care sa poata rula atata in browser cat si pe dispozitive mobile.
+But to achieve this goal, 
+we need the pose estimation algorithm to have a minimum of 30 fps that can run both in the browser and on mobile devices.
+
+% In continuare ne vom exact pe rularea algoritmilor de detectare a posturi
+%  in timp real pe imagini de la camera video la o performanta de minim 30 de framuri pe secunde.
+%  Dar si pe gasirea arhitecturile de retele neuronale de convolutie care sa permita acest lucru.
+Next we will accurately run real-time pose estimation algorithms on the video camera at a performance of at least 30 frames per second.
+  But also finding convolution neural network architectures to allow this.
+
+%  Nu dorim folosirea unui server care sa primesca acest stream-urilor de imagini si sa aplice algoritmi de detectie
+%   datorita calculelor foarte costisitoare ca timp si volumului mare de date care trebuie procesate.
+We do not want to use a server that are to receive the streams of images 
+and apply detection algorithms due to calculations costly in time and volume of data to be processed.
+
+% Varianta cu servar a fost implementat dar mare problema a fost delay de 3-4 sec 
+%   astfel obiectivul nostrul minim 30 de framuri pe secunda nu putea fi realizabil.
+The server variant was implemented but the big problem 
+was a delay of 3-4 sec so our goal of at least 30 frames per second could not be achieved.
 
 
+% Pentru a obtine performance maxime a algoritmilor este necesara rularea lor pe placa grafica a aplicatie client.
+To achieve maximum performance of the algorithms, 
+it is necessary to run them on the GPU of the client application. 
+
+%  Noi am propus implementare a doua prototipuri , o aplicatie web si una mobile. 
+ We proposed the implementation of two prototypes, a web application and a mobile application.
+%  Fiecare aplicatie implementeaza o abordarea diferite. 
+Each application implements a different approach.
+
+%  Aplicatie web calculeaza Range of Motion pentru a ajuta kinetoterapeutul sa faca o evaluare mai eficenta, pe langa
+%  asta vom numera numarul repetari a unui exercitiu pe care pacientul  il va efectua
+The web application calculates a range of motion to help the physical therapist make a more effective assessment, 
+besides this will count the number of repetitions of an exercise that the patient will perform.
+
+
+%  Aplicatia mobile va calcula distantele facute de mainile si picioarele pacientului in timpul unui exercitiu 
+%  astfel generand raporte cu performanta de la o zi la alta pentru a imbunatati motivarea pacientului.
+
+The mobile app will calculate the distance traveled by the hands and legs during an exercise that the 
+patient will perform, generating reports with day-to-day performance to improve motivation of the patient..
+
+
+
+
+
+
+
+ \section{Google Posetnet vs Convolutional Pose Machines }
 
 \section{Web - Application development}
+
+
+Application is an interactive software destined for patients who need physiotherapy
+treatments. Our application guide patient to see how they need to make their exercises in 
+a correct manner by showing Range of Motion (ROM) in real time and after allowing us to 
+report on these dates for motivation patient. 
+Also, the application count the number of movements. 
+It is based on exercices, because we think that a constant and correct number of movements could be more efficient for patients then just to present them what exercices they need to do. In this manner the application guides each patient during the all period they need to follow their treatment. 
+
 \begin{figure}[htbp]
 	\centerline{\includegraphics[scale=0.8]{fig/demo-mykineto.png}}  
 	\caption{Demo of My Kineto}
@@ -59,6 +130,11 @@ This part is used to track as much as possible points detected in the first phas
 
 
 \section{Mobile - Application development}
+
+\par This application is designed to help everyone who need physiotherapy treatment to stay motivated,
+ reach their goals, and create habits that are healthy and helpful for a long term. 
+ In this case we have a solution by creating a app which will be a useful tool for patients who needs help 
+ to reach their goals by automated tracking of distances.
 \subsection{Analysis and design}
 \subsection{Implementation}
 \section{Experimental results}
