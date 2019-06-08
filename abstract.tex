@@ -1,23 +1,66 @@
 \begin{abstract}
 \begin{comment}
 
-Cei mai multi pacienti care necesita recuperare medicala pe termen lung, asta insemnand in medie 2 sau 3 ani, renunta pe parcursul perioadei de recuperare deoarece nu observa rezultate chiar daca acestea exista, ele nu sunt evidente cu ochiul liber.
-Mai ingrijorator este că până la 70\% din pacienți renunță la fizioterapie, deoarece nu pot vedea rezultate imediate \cite{7FactsInPhysicalTherapy}.
-Solutia nostra este o aplicatie prin care pacientul va putea sa isi inregistreze sesiunile de recuperare iar in real time va primi feedback constant legat de Range of Motion si numarul de repetati facute corect. In urma acestor date vom genera raporte prizind progresul pacientului, astfel vom incurajeze pacienti sa isi continua recuperarea medicala pe tot parcursul ei. 
-În fizioterapie, gama de urmărire a mișcării (ROM) este o abordare standard pentru măsurarea progresului în terapia pacienților.
-Pentru obtinerea de Range of Motion vom folosi algoritmi intelegenti de detectare a posturi in timp real.
+Scopul acestei lucrări este de a obține rapoarte privind progresul pacienților bazate pe algoritmi inteligenți de estimare a posibilei care să motiveze pacientul să continue recuperarea medicală.
+
+Majoritatea pacienților necesită recuperare medicală pe termen lung, ceea ce înseamnă o medie de 2 sau 3 ani, renunțarea în timpul perioadei de recuperare deoarece nu văd rezultatele chiar dacă acestea există, acestea nu sunt evidente cu ochiul liber.
+Mai îngrijorător este faptul că până la 70\% dintre pacienți renunță la fizioterapie, deoarece nu pot vedea rezultate imediate.
+
+Solutia nostra consta in realizarea de doua prototipuri care sa demostreze capacitatea acestor algoritmi de a fi integrati intr-o solutie care sa ajute utilizator final, ne vom axa pe performanta acestor algoritmi.
+
+Principala problema este performanta redusa deoarece necesita un volumn mare de calcule.
+
+Obiectivul este de a rula algoritmi la o performanta de 30 framuri pe secunda pe dispozitivul utilizatorului final.
+In continuare am studiat doua arhitecturi importante in pose estimation.
+
+MobileNet care este optimizata pentru mobile, reducand numarul de caulcule.
+Convolutional pose machines care este specializata in detectia de posturi, avand o structura composa din mai multe 
+clasificatoare.
+In acest sens am ales utilizarea in doua aplicati separate a acestor arhitecturi observand performanta si precizia estimarilor.
+
+O aplicatie mobila pentru urmarirea progresului pacientului in timp real folosind camera telefonului. 
+Acesta va face fiecare exercitu in fata camerai si va primit raporte legate de performantele lui pe zile.
+Performantele insemnand distantele parcurse in timpul exercitiului de membrele acestuia.
+
+
+Aplicatie web care va calcula Range of Motion pentru a ajuta pacientul sa faca corect exercitile, astfel vom numara numarul de repatari corecte pe baza unghiurilor care le optine pacientul in timpul exercitiului.
+ 
+In urma implementari celor doua variante am descoperit ca arhitectura retelei prezentate in articolul Convolutional pose machines \cite{DBLP:journals/corr/WeiRKS16} este mai performanta si precisa decat implementarea web folosind  arhitectura MobileNet, care nu este special optimizata pentru problema de pose estimation.
+Am obtinut o performata medie de 20 FPS pentru MobileNet in comparatie cu Convolutional pose machines, unde am obtinut 30-60 FPS si o precizie mult mai mare.
+ 
 
 \end{comment}
 
 \par The goal of this paper is to obtain reports on patient progress based on intelligent pose estimation  algorithms motivate the patient to continue medical recovery.
 \par Most patients require long-term medical recovery, which means an average of 2 or 3 years, give up during the recovery period because they do not see results even if they exist, they are not obvious to the naked eye.
+More worrying is that up to 70\% of patients give up physiotherapy because they can not see immediate results.
 
-\par More worrying is that up to 70\% of patients give up physiotherapy because they can not see immediate results. \cite{7FactsInPhysicalTherapy}.
+Our solution consists of making two prototypes demonstrating the ability of these algorithms to integrate into a solution to help the end user, we will focus on the performance of these algorithms.
 
-\par Our solution is an application called My Kineto through which the patient will be able to record their therapy sessions and will receive constant feedback in real time about Range of Motion. Using this data these data, we will generate reports on patient progress.
+The main problem is low performance because it requires a large amount of computing.
+The objective is to run algorithms at a performance of 30 frames per second on the end-user device.
+Next, we studied two important architectures in pose estimation.
+
+MobileNet is optimized for mobile, reducing the number of calculations through special architecture \cite{DBLP:journals/corr/HowardZCKWWAA17}.
+
+Convolutional pose machines that specializes in pose estimation, having a composite structure of several classifiers \cite{DBLP:journals/corr/WeiRKS16}.
+
+In this regard, we have chosen to use two separate applications of these architectures, observing the performance and accuracy of the estimates.
+
+The mobile application for tracking patient progress in real time using the camera phone.
+He will do each exercise in front of the camera and receive reports related to his performance on days.
+The performances are the distances traveled during the exercise by its members.
+
+The web application will calculate a range of motion to help the patient perform the correct exercises, so we will count the correct number of repetitions of an exercise based on the angles that help the patient during the exercise.
+
+Following the implementation of the two variants, we discovered that the network architecture presented in the paper with name Convolutional pose machines \cite{DBLP:journals/corr/WeiRKS16} is more powerful and accurate than the web implementation using the MobileNet architecture, which is not particularly optimized for the pose estimation problem.
 
 
-
-
+This work is the result of my own activity. I have neither given nor
+received unauthorized assistance on this work.
+\newline\newline
+BABEŞ-BOLYAI UNIVERISTY\newline
+CLUJ-NAPOCA, JUNE 2019\newline
+Timis Razvan Vasile
 
 \end{abstract}
