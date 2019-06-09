@@ -79,7 +79,7 @@ Presenting the main aspects that led to results.
  
 \par This application is designed to help everyone who need physiotherapy treatment to stay motivated,
  reach their goals, and create habits that are healthy and helpful for a long term. 
- In this case we have a solution by creating a app which will be a useful tool for patients who needs help to reach their goals by automated tracking of distances.
+ In this case we have a solution by creating an app which will be a useful tool for patients who needs help to reach their goals by automated tracking of distances.
  
 \subsection{Analysis and design}
 % Aplicația care vine să demonstreze capabilitățile algoritmului de urmărire posturi este de tip client-server.
@@ -134,7 +134,7 @@ This network was implemented in python using the tensorflow library. After train
 After testing it was found that the performance is weak due to its running on the CPU.
 
 % Dupa un research am descoperit o librarie care stie sa convertesca modelul tensorflow lite intr-un model capabil sa folosesca placa grafica. Acesta librarie se numeste Mobile AI Compute Engine (MACE)  care a fost dezvoltata de cei de la XiaoMi. Pentru a putea folosi MACE a trebui sa integram o legatura dintre android si C++, deoarece macea este scris in C++ folosind Android NDK.
-After a research we found a library that knows how to convert the tensorflow lite model into a model capable of using the graphics card. This framework is called the Mobile AI Compute Engine (MACE) that was developed by XiaoMi. To be able to use MACE, I have to integrate a connection between android and C ++, because the mace is written in C ++, we will use Android NDK for integration.
+After a research we found a library that knows how to convert the tensorflow lite model into a model capable of using the graphics card. This framework is called the Mobile AI Compute Engine (MACE), that was developed by XiaoMi. To be able to use MACE, I have to integrate a connection between android and C ++, because the MACE is written in C ++, we will use Android NDK for integration.
 
 % In urma integrari sa obtinut performate mult mai bune, ajungand la 30-40 de framuri pe secunda.
 % Obinund o rularea a modelului in 17 ms.
@@ -151,13 +151,14 @@ In the next chapter we will give you more details about the implementation of th
 % Pentru implementarea aplicatie sa folosit Flutter.
 % Flutter este un framework facut de cei de la google, este scris in limbajul de programare Dart. Permitea rularea aceluias cod pe mobile, desktop, web si dispozitive IoT. Acesta este orientat pe componente oferind o reutilizarea a codului crescuta.
 Flutter was used to implement the application.
-Flutter is a framework made by google, is written in Dart programming language. It allowed running the same code on mobile, desktop, web and IoT devices. It is component-oriented offering a re-use of increased code.
+Flutter is a framework made by google, is written in Dart programming language. It allowed running the same code on mobile, desktop, web and IoT devices. It is component-oriented offering a reuse of increased code.
 
 % Daca am face o comparatie in Flutter si React Native putem observa ca din punct de vedere arhitectural ambele implementeaza concepte asemanatoare, cum ar fi componentele, provider consumer, arhitectura de Flux.
-If we make a comparison in Flutter and React Native, we can see that architecturally both implement similar concepts, such as components, provider consumer, Flux architecture.
+If we make a comparison between Flutter and React Native, we can see that architecturally both implement similar concepts, such as components, provider-consumer, Flux architecture.
 % Dar mare diferenta consta in implementarea interna.
 % React native foloseste componente native de android, prin folosirea unui cancal de comunicare pentru componenta din javascript si cea native.
 % Flutter a renuntat la acesta idee , nu mai folosind componente native, a recurs la desenarea acestora direct prin utilizarea API internat care defapt il folosesc si componentele native pentru a fi desenate pe UI.
+
 But the big difference is the internal implementation.
 React native uses native Android components by using a communication channel for the javascript and native component.
 Flutter gave up this idea, no longer using native components, resorted to drawing them directly using the board API that actually uses native components to draw on the UI.
@@ -168,7 +169,7 @@ Flutter gave up this idea, no longer using native components, resorted to drawin
 % \end{figure}
 
 % Ca sa integram partea de pose estimation a fost nevoie de a deschide un activity din android folosindune de arhitectura Flutter care permite comunicare dintre codul scris in dart cu cel scris in java.
-In order to integrate the pose estimation part it was necessary to open an activity from android using the Flutter architecture that allows communication between the written code in the dart with the one written in java.
+In order to integrate the pose estimation part it was necessary to open an activity from android using the Flutter architecture that allows communication between the written code in the Dart with the one written in Java.
 
 % Pentru a obtine performante mari ale algoritmului de pose estimation, am folosit MACE care vine cu o metoda de a converti modelul din tensorflow intr-un model care poate rula pe placa grafica a telefonului.
 To achieve high performance of the pose estimation algorithm, we used MACE that comes with a method to convert the tensorflow model into a model that can run on the graphics card of the phone.
@@ -176,12 +177,12 @@ To achieve high performance of the pose estimation algorithm, we used MACE that 
 To draw the skeleton obtained by the algorithm we will use opencv, which will also be integrated from C ++.
 
 % Ca sa generam rapoarte vom rula un cloud function care va prea datele de la fiecare sesiune de exerciti si le va procesa pentru a obtine distantele parcurse. Acesta functie va crea obiecte de tipul ProgressRaport, se pot observa in Figura 2.
-In order to generate reports, we will run a cloud function that will also take the data from each exercise session and process them to get the distance traveled. This function will create ProgressRaport objects, as can be seen in Figure 2.
+In order to generate reports, we will run a cloud function that will also take the data from each exercise session and process them to get the distance traveled. This function will create ProgressRaport objects, as can be seen in Figure \ref{fig:uml-mobile}.
 
 % Acesta distanta va fi calculata cu ajutorul formulei matematice a distantei euclidiane.
-% Astfel vom parcurge tot cate doua  si vom calcula distanta din ele. Algoritmul va exclude distantele foarte mici pentru a scadea erroare.
+% Astfel vom parcurge tot cate doua detectie de cordonate  si vom calcula distanta din ele. Algoritmul va exclude distantele foarte mici pentru a scadea erroare.
 This distance will be calculated using the mathematical formula of the Euclidean distance.
-So we will go through two and calculate the distance from them. The algorithm will exclude very small distances to lower the error.
+So we'll take two coordinate detections and calculate the distance from them. The algorithm will exclude very small distances to lower the error.
 
 
 \subsection{User manual}
@@ -199,8 +200,10 @@ The application is currently only available for
 android operating systems, even if the final version is
 cross-platform, also available in iOS because of
 the lack of an iOS phone, we can not guarantee
-good operation of the application. One can download on Google Play
-at this link: https: //play.google.com/store/apps/details? id = com.mykineto
+good operation of the application. 
+
+One can download on Google Play
+at this link: https://play.google.com/store/apps/details?id=com.mykineto
 or you can use it apk from CD attached works.
 
 \begin{figure}[!htb]
@@ -216,14 +219,14 @@ or you can use it apk from CD attached works.
 
 % Pentru rularea aplicației aveți nevoie de un telefon cu
 % sistemul de operate android la versiune minimă 9.
-You need a phone to run the application
-Android operating system to minimal version 9.
+You need a phone to run the application that has 
+android operating system with a minimal version 9.
 
 % O să apară fereastra din Figura \ref{fig:screen-login}.
 % Utilizatorul se va autentifica in aplicatie, dupa care va vedea o lista de cu programe de recuperare.
 % Va intra pe un program de recuperare unde va isi va alege ziua in care va efectua exercitul.
 The window in Figure \ref{fig:screen-login} will appear.
-The user will log in to the application and then see a list of recovery programs.
+The user will login to the application and then see a list of recovery programs.
 He will enter a recovery program where he will choose his day of exercise.
 
 \begin{figure}[!htb]
@@ -269,7 +272,7 @@ treatments. Our application guide patient to see how they need to make their exe
 a correct manner by showing Range of Motion (ROM) in real time and after allowing us to 
  count the number of movements. 
  
-It is based on exercices, because we think that a constant and correct number of movements could be more efficient for patients then just to present them what exercices they need to do. In this manner the application guides each patient during the all period they need to follow their treatment. 
+It is based on exercices, because we think that a constant and correct number of movements could be more efficient for patients then just to present them what exercices they need to do. In this manner the application guides each patient during the period they need to follow their treatment. 
 
 \subsection{Analysis and design}
 
@@ -284,24 +287,24 @@ In this sense, we will use tensorflow.js to run the artificial intelligence algo
 We will use the PoseNet.
 
 % PoseNet este un model antrenare care are la baza o reatea neuronale de convolutie, invatata sa clasifice partile corpului dand ca rezultat cordonatele acestora. In figura \ref{fig:uml-posenet} se poate observa o diagrama care prezinta structura datelor de iesire care le ofera PoseNet.
-PoseNet is a training model based on a convolutional neural network, learn to classify body parts, resulting in their coordinates. Figure \ref{fig:uml-posenet} shows a diagram showing the structure of output data provided by PoseNet.
+PoseNet is a training model based on a convolutional neural network, learn to classify body parts, resulting in their coordinates. Figure \ref{fig:uml-posenet} show a diagram that represent the structure of output data provided by PoseNet.
 
  \begin{figure}[htbp]
 	\centerline{\includegraphics[scale=0.7]{fig/uml-posenet.png}}  
-	\caption{PoseNet output}
+	\caption{PoseNet Output}
 	\label{fig:uml-posenet}
 \end{figure}
 
 % PoseNet a fost realizat de cei de la google si foloseste o arhitectura de tip MobileNet.
 % MobileNet este o arhitectura optimizata pentru a rula pe dispozitive cu putere scazuta de calcul, ca telefoanele.
-PoseNet was developed by Google and uses a MobileNet like architecture.
+PoseNet was developed by Google and uses a MobileNet architecture.
 MobileNet is an optimized architecture to run on low-power devices such as phones.
 
 % In articolul "Mobilenets: Efficient convolutional  neuralnetworks for mobile vision applications"  \cite{DBLP:journals/corr/HowardZCKWWAA17} sunt descrise principale optimizare aduse de arhitectura numit MobileNet.
 In the article "Mobilenets: Efficient convolutional neuralnetworks for mobile vision applications"  \cite{DBLP:journals/corr/HowardZCKWWAA17} are described the main optimization brought by the architecture called MobileNet.
 
 % Cea mai importanta optimizare de performanta a fost realizata prin introducerea unui nou tip de strat, numit Depthwise Separable Convolution. Acest strat inlocuieste convolutila standard. Si mare diferenta este ca a impartit in doi pasi separati, aplicarea filtrari si combinarea.
-The most important performance optimization was achieved by introducing a new type of layer, called Depthwise Separable Convolution. This layer replaces standard convolutions. And the big difference is that it divided into two separate steps, applying filtration and combining.
+The most important performance optimization was achieved by introducing a new type of layer, called Depthwise Separable Convolution. This layer replaces standard convolution and the big difference is that it is divide into two separate steps, applying filtration and combining.
 
 % Pe baza keypoints obtinute de la PoseNet vom desena unghiurile dintre membrele pacientului folosind canvas.
 Based on keypoints from PoseNet we will draw angles between the patient's body limbs using canvas.
@@ -320,8 +323,8 @@ For example, if the user does the squat exercise, then the algorithm will work o
     \item End of exercise if the knee angle is between 145 and 300 degrees
 \end{itemize}
 
-% Pe baza acestor doua stari, vom numara numarul de exercitii facute corect din puncte de vedere a unghiului genunchiului.
-ased on these two states, we will count the number of exercises made correctly from the point of view of the knee angle.
+% Pe baza acestor doua stari, vom numara numarul de exercitii facute corect din puncte de vedere a unghiurilor.
+Based on these two states, we counted the number of exercises done correctly in terms of angles.
 
  \begin{figure}[htbp]
 	\centerline{\includegraphics[scale=0.7]{fig/demo-mykineto.png}}  
@@ -329,8 +332,7 @@ ased on these two states, we will count the number of exercises made correctly f
 	\label{fig:demo-web-mykineto}
 \end{figure}
 
-% In Figura \ref{fig:demo-web-mykineto} se poate vedea cum algoritmul numara numarul de repetari corecte si
-% afiseaza punctele detectate in timp real de algoritm folosind canvas.
+% In Figura \ref{fig:demo-web-mykineto} se poate vedea cum algoritmul numara numarul de repetari corecte si afiseaza punctele detectate in timp real de algoritm folosind canvas.
 In Figure \ref{fig:demo-web-mykineto} we can see how the algorithm counts the number of correct iterations and displays the real-time detected algorithm points using canvas.
 
 
@@ -361,9 +363,8 @@ React uses the new JavaScript Extension (JSX) syntax that is similar to the Hype
 
 % O cauză a modelului declarativ bazat pe componente constă în reutilizarea codului, fiecare
 % componentă își încapsulează și gestionează propria stare. Se pot realiza interfețe complexe prin
-% asamblarea lor precum niște pazăluri. Fiecare componentă își gestionează, asta este un task dificil în
-% realizarea unor arhitecturi complexe.
-A cause of the component-based declarative model is the reuse of the code, each component encapsulates and manages its own state. Complex interfaces can be made by assembling them like puzzles. Every component manages, this is a difficult task in building complex architectures.
+% asamblarea lor precum niște pazăluri. Fiecare componentă își gestionează starea curenta, acesta find un task dificil în realizarea unor arhitecturi complexe.
+A cause of the component-based declarative model is the reuse of the code, each component encapsulates and manages its own state. Complex interfaces can be made by assembling them like puzzles. Each component manages its current state, which is a difficult task in building complex architectures.
 
 % Pentru o eficiență mai sporită, React folosește Virtual DOM, care este o abstractizare a
 % DOM, fiindcă operațiile asupra DOM sunt încete \cite{virtual-dom-react}.
@@ -372,21 +373,21 @@ For greater efficiency, React uses Virtual DOM, which is an abstraction of DOM, 
 % Tensorflow.js permite rula algoritmilor de inteligenta artificala in mediul javascript.
 % Dupa cum stim algoritmi de inteligenta artificiala, mai ales cei aplicati pe imagini sau video au nevoie de o putea mare de calcul.
 Tensorflow.js allows the artificial intelligence algorithms to run in javascript.
-As we know artificial intelligence algorithms, especially those applied to images or video need a great deal of computing.
+As we know artificial intelligence algorithms, especially those applied to images or video need a high performance of computing.
 % Pentru a rezolva aceasta problema, tensorflow.js ruleaza algoritmi folosind WebGL in mod automat.
 % Acest lucra face ca algoritmi sa ruleze pe GPU \cite{tensorflow.js}.
 To solve this problem, tensorflow.js runs algorithms using WebGL automatically.
 This work makes algorithms run on the GPU \cite{tensorflow.js}.
 
 % Pe lângă asta, pentru dezvoltarea aplicație s-a folosit typescript care este un super set tipizat a lui javascript și mediul de dezvoltare Visual Studio Code.
-Additionally, for the development of the application we used a typescript what is a superset of JavaScript which primarily provides optional static typing, classes and interfaces. And the Visual Studio Code development environment.
+Additionally, for the development of the application we used a typescript what is a superset of JavaScript which primarily provides optional static typing, classes and interfaces. Also we use the Visual Studio Code development environment.
 
 \section{Experimental results}
 
 % In urma implementari celor doua variante de mai sus am facute mai multe teste legate de performanta algoritmilor.
 Following the implementation of the above two variants we performed several tests related to the performance of the algorithms.
 % Mai exact, cat de repede ruleaza algoritmul de pose estimation pe o imagine. Cu cat ruleaza mai repede cu atata avem p performanta mai buna, targetul nostru find de 30 frame per seconds.
-Specifically, how fast the estimation pose algorithm runs on an image. The faster it runs, the better our performance, our target find of 30 frames per second.
+Specifically, how fast the estimation pose algorithm runs on an image. The faster it runs, the better our performance will become and our target is to obtain 30 frames per second.
 
  \begin{figure}[htbp]
 	\centerline{\includegraphics[scale=0.7]{fig/mobile-performace.png}}  
@@ -395,10 +396,10 @@ Specifically, how fast the estimation pose algorithm runs on an image. The faste
 \end{figure}
 
 % In Figura \ref{fig:mobile-perf} putem observa o create cu 50\% a performantei in cazul modelul optimizat pentru aplicatie mobila.
-In Figure \ref{fig:mobile-perf} we can see a 50\% increase in performance for the mobile optimized model.
+In Figure \ref{fig:mobile-perf} we can see a 50\% increase performance for the mobile optimized model.
 
-% In cazul aplicatie web, lucrurile stau un pic diferit. Am incerc sa fac o comparatie intre rularea algoritmului pe client sau pe server. Se poate observa clar din figura \ref{fig:web-perf} ca varianta cu servarul se exclude doarece ori cat ar fi servarul de bun durata requestului dureaza in medie 50 ms doarece se trimit un numar mare de date.
-In case of a web application, things are a bit different. I'm trying to make a comparison between running the algorithm on the client or on the server. It can be clearly seen from Figure \ref{fig:mobile-perf} that the version with the server is excluded or that the length of the request server lasts for an average of 50 ms since a large number of data is sent.
+% In cazul aplicatie web, lucrurile stau un pic diferit. Am incerc sa fac o comparatie intre rularea algoritmului pe client sau pe server. Se poate observa clar din figura \ref{fig:web-perf} ca varianta cu folosirea unui servarul se exclude doarece ori cat ar fi servarul de bun durata requestului dureaza in medie 50 ms doarece se trimit un numar mare de date.
+In case of a web application, things are a bit different. I'm trying to make a comparison between running the algorithm on the client or on the server. It can be clearly seen from Figure \ref{fig:mobile-perf} that the version with using the server is excluded because the duration of the request lasts for an average of 50 ms since a large number of data is sent.
 
  \begin{figure}[htbp]
 	\centerline{\includegraphics[scale=0.7]{fig/web-performace.png}}  
@@ -410,8 +411,8 @@ In case of a web application, things are a bit different. I'm trying to make a c
 
 % O posibila extindere a sistemului ar consta in unificarea celor doua aplicatie astfel incat sa avem cele doua variante prin care motivam pacientul.Varianta prin care urmarim progresul prin calcul distantelor si varinata in care calculam range of motion , numarand numarul de exerciti corecte. 
 % Sa fie disponibile atata pe web cat si pe mobile.
-A possible extension of the system would be to unify the two applications so that we have the two variants by which we motivate the patient. The variant by which we follow the progress by calculating the distances and the variation in which we calculate the range of motion, counting the number of correct exercises.
-Be available both on the web and on the mobile.
+A possible extension of the system would be to unify the two applications so that we have the two variants by which we motivate the patient. The variant which we follow the progress by calculating the distances and the variant in which we calculate the range of motion, counting the number of correct exercises.
+Both will be available on the web and on the mobile.
 
 % In plus ne gandim la o extindere a functionalitati incat sa acoperim scenarile de utilizare minimale pentru un utilizator care are probleme de sanatate. In primul rand ar trebui implementate comenzile vocale.
 In addition, we are considering extending functionality to cover minimal usage scenarios for a user who has health problems. First of all, voice commands should be implemented.
@@ -420,12 +421,12 @@ In addition, we are considering extending functionality to cover minimal usage s
 It would be of interest to implement a model for a physiotherapist to manage each patient's recovery program plus access to performance reports.
 
 % O alta optimizare care o vad este combinarea celor doua arhitecturi de retele neuronale in una singura.
-% Astfel oferind o posibila crestere a performantei. Dar si gasirea unei configuratie optima de retea care sa functioneze atata pe web cat si pe mobile.
+% Astfel oferind o posibila de imbunatatire a performantei. Dar si gasirea unei configuratie optima de retea care sa functioneze atata pe web cat si pe mobile.
 Another optimization that I see is the combination of the two neural network architectures into one.
-This provides a possible increase in performance. And finding an optimal network configuration that works both on the web and on the mobile.
+This provides the possibility of increasing the performance. And finding an optimal network configuration that works both on the web and on the mobile.
 % Tot la optimarea ne puteam gandi la implementarea unui algoritm de urmarirea a contururilor. Astfel detectia facanduse doar la inceput. 
-At optimization we can also think of implementing a contour tracking algorithm. So the detection was only at the beginning.
+
+At optimization we can also think of implementing a tracking algorithm based on contour. The detection will always be at the beginning.
 
 % Dupa ne inspiram de la concurenta, am putea implementa un joc in care pacientul este pus sa faca anumite  miscari pentru a castig a jocul.
-After inspiring us from the competition, we could implement a game in which the patient is made to make certain moves to win the game.
-
+After inspiring us from the competition, we could implement a game in which the patient have to do  certain moves to win the game.
