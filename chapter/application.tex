@@ -70,9 +70,10 @@ patient will perform, generating reports with day-to-day performance to improve 
 %  Aplicatie web calculeaza Range of Motion pentru a ajuta pacientul sa faca corect exercitile, astfel vom numara numarul de repatari corecte pe baza unghiurilor care le optine pacientul in timpul exercitiului
 The web application will calculate a range of motion to help the patient perform the correct exercises, so we will count the correct number of repetitions of an exercise based on the angles that help the patient during the exercise.
 
-
-
 \section{Mobile - Application development}
+
+In acest capitol vom vorbi implementarea aplicatie mobile. Prezentand principale aspecte care au dus la rezultatele obtinute.
+
 
 \subsection{Specification of the problem}
  
@@ -83,21 +84,134 @@ The web application will calculate a range of motion to help the patient perform
  
  
 \subsection{Analysis and design}
-Pentru mobile exista tensorflow Lite care este un model antrenat optimizat care permite rularea pe orice telefon.
- Ideei \cite{DBLP:journals/corr/WeiRKS16}
-\begin{itemize}
-    \item Acesta arhitectura a fost special conceputea pentru pose estimation
-    \item The contribution of this paper is to implicitly model long-range dependencies between variables in structured prediction tasks such as articulated pose estimation.
-\end{itemize}
+Aplicația care vine să demonstreze capabilitățile algoritmului de urmărire posturi și de determinare a poziției membrelor, este de tip client-server.
 
+Clientul este o aplicatie mobile, find compatibila atata cu systemul Android cat si cu IOS. 
+Vom oferi posibilitatea utilizari systemului si fara conexiune la internet, datorari utilizari librarie firebase.
+
+Serverul este compos din mai multe servici oferit de google cloud, sub denumirea Firebase. Serviciul Firestore faciliteaza operatile CRUD pe resurse precum programul de exerciti. Cloud Function ofera  executia de function custom pentru a implementa logica de bussnise. Datele vor fi stocate intr-o baza de date NOSQL de catre serviciul Firestore. Comunicare dintre aplicatie client si servar se face prin protocolul Http, 
+
+ Figura \ref{fig:uml-client-server} prezintă o diagramă în care se pot vedea relațiile dintre client și servicile firebase.
+ 
+ \begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.7]{fig/client-server.png}}  
+	\caption{Diagrama de implementare}
+	\label{fig:uml-client-server}
+\end{figure}
+
+Scopul este dea a motiva pacientul prin raporte zilnice cu activitatea lui.
+In acest sens se va rula in timp real algoritmi de pose estimation pe imaginile reciptionate 
+de la camera telefonului mobil si vom salva datele generate in firebase.
+In Figura \ref{fig:uml-mobile} putem observa modul in care se salveaza datele obtinute de la algoritmul de pose estimation.
+Astfel de fiecare daca cand incepem sa facem un exercitiu se creata o noua sessiune unde ajung sa fie salvate toate miscarile care algoritmul le-a detectat in timp ce facem exercitul.
+ \begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.6]{fig/uml-mobile.png}}  
+	\caption{Diagrama de clase}
+	\label{fig:uml-mobile}
+\end{figure}
+
+Pentru detectarea vom folosi o reata neuronala de convolutie cu o arhitectura specializata in estimarea posturilor.
+Arhitectura retelei este descrisa in articolul "Convolutional pose machine" \cite{DBLP:journals/corr/WeiRKS16}.
+Acesta retea a fost implementat in python folosind libraria tensorflow. Dupa antrenarea ei am obtinut un model 
+care a fost convertit in unul optimizat pentru a rula pe dispozitive mobile, numit tensorflow lite.
+Dupa testarea lui sa constat ca performantele sunt slabe datorita rulari lui pe CPU.
+
+Dupa un research am descoperit o librarie care stie sa convertesca modelul tensorflow lite intr-un model capabil sa 
+folosesca placa grafica. Acesta librarie se numeste Mobile AI Compute Engine (MACE)  care a fost dezvoltata de cei de la XiaoMi. Pentru a putea folosi MACE a trebui sa integram o legatura dintre android si C++, deoarece macea este scris in C++ folosind Android NDK.
+In urma integrari sa obtinut performate mult mai bune, ajungand la 30-40 de framuri pe secunda.
+Obinund o rularea a modelului in 17 ms.
+
+Mai sus am descris cum se salveaza sesiuni in timp ce utilizatorul face exerciti.
+Pe baza acestor sesiuni se vor genera raporte. Astfel se foloseste un cloud function care ia toate sesiunile din ziua curenta si genereaza un ProgressReport, conform diagramei din Figura \ref{fig:uml-mobile}.
+In urmatorul capitol vom da mai multe detali legate de implementarea aplicatie.
 
 \subsection{Implementation}
+Pentru implementarea aplicatie sa folosit Flutter.
+Flutter este un framework facut de cei de la google, este scris in limbajul de programare Dart. Permitea rularea aplicatilor pe mobile, desktop, web si dispozitive IoT. Acesta este orientat pe componente oferind o reutilizarea a codului crescuta.
+
+Daca am face o compoaratie in Flutter si React Native putem observa ca din punct de vedere arhitectural ambele implementeaza concepte asemanatoare, cum ar fi componentele, provider consumer, arhitectura de Flux.
+Dar mare diferenta consta in implementarea interna total diferita.
+React native foloseste componente native de android, prin folosirea unui cancal de comunicare pentru componenta din javascript si cea native.
+Flutter a renuntat la acesta idee , nu mai folosind componente native, a recurs la desenarea acestora direct prin
+api internat care defapt il folosesc si componentele native pentru a fi desenate pe UI.
+
+%  \begin{figure}[htbp]
+% 	\centerline{\includegraphics[scale=0.7]{fig/PlatformChannels.png}}  
+% 	\caption{Architectural - Platform channels \cite{flutter}}
+% 	\label{fig:flutter-plaform-channels}
+% \end{figure}
+
+Ca sa integram partea de pose estimation a fost nevoie de a deschide un activity din android folosindune de arhitectura Flutter care permite comunicare dintre codul scris in dart cu cel scris in java. In Figura  \ref{fig:flutter-plaform-channels} putem observa acesta arhitectura.
+
+Pentru a obtine performante mari ale algoritmului de estimare a posturi am folosit MACE care vine cu o metoda de a converti modelul din tensorflow intr-un model care poate rula in C++ folosind placa grafica a telefonului.
+Ca sa desenam sckeletul obtinut de algoritm vom folosi opencv. 
+
+Ca sa generam raporte vom rula un cloud function care va prea datele de la fiecare sesiune de exerciti si le va procesa pentru a obtine distantele parcurse.
+Acesta distanta va fi calculata cu ajutorul formulei matematice a distantei euclidiane.
+AStfel vom parcurse tot cate doua estimari de poziti si vom face disnta din ele. Algoritmul va exclude distantele foarte mici pentru a scadea erroare de calcul.
+
+
 \subsection{User manual}
+
+
+
+Aplicația este disponibilă momentan doar pentru
+sistemele de operare android, chiar dacă varianta finală este
+cross-platform, fiind disponibilă și în varianta iOS, din cauza
+lipsei unui telefon cu sistem de operare iOS, nu putem garant
+buna funcționare a aplicatie. O puțeti descărca pe Google Play
+la acest link:https://play.google.com/store/apps/details?id=com.mykineto
+sau o puteți să folosiți apk de pe CD atașat lucrări.
+
+\begin{figure}[!htb]
+  \centering
+  \subfloat[Login]{
+    \includegraphics[width=0.3\textwidth,height=0.55\textwidth]{fig/screen-login.jpg}\label{fig:screen-login}}
+  \hfill
+  \subfloat[Rehab program]{
+    \includegraphics[width=0.3\textwidth,height=0.55\textwidth]{fig/screen-program.jpg}\label{fig:screen-program}}
+    
+    \caption{Screen with login and rehab program}
+\end{figure}
+
+Pentru rularea aplicației aveți nevoie de un telefon cu
+sistemul de operate android la versiune minimă 4.3.
+După instalarea apăsați pe aplicați pentru a se deschide.
+O să apară fereastra din Figura \ref{fig:screen-login}.
+Utilizatorul se va autentifica in aplicatie, dupa care va vedea o lista de cu programe de recuperare.
+Va intra pe un program de recuperare unde va isi va alege ziua in care va efectua exercitul.
+
+
+\begin{figure}[!htb]
+  \centering
+  \subfloat[Workout]{
+    \includegraphics[width=0.3\textwidth,height=0.55\textwidth]{fig/screen-workout.jpg}\label{fig:screen-workout}}
+  \hfill
+  \subfloat[Exercise]{
+    \includegraphics[width=0.3\textwidth,height=0.55\textwidth]{fig/screen-exercise.jpg}\label{fig:screen-exercise}}
+    
+    \caption{Screen with workout and exercise}
+\end{figure}
+
+Dupa alegerea zilei, utilizatorul va incepe sa faca exercitile in fata camerai telefonului.
+Aplicatia va monitoriza si salva miscarile facute de utilizator in timpul fiecarui exercitiu.
+
+\begin{figure}[!htb]
+  \centering
+  \subfloat[Pose Estimation]{
+    \includegraphics[width=0.3\textwidth,height=0.55\textwidth]{fig/screen-pose.jpg}\label{fig:screen-pose}}
+  \hfill
+  \subfloat[Statistics]{
+    \includegraphics[width=0.3\textwidth,height=0.55\textwidth]{fig/screen-progress.jpg}\label{fig:screen-progress}}
+    
+    \caption{Screen with pose estimation and progress}
+\end{figure}
+Utilizatorul va putea viziualiza statisticile pe zile a progresului facut de in el timpul antrenamentului. 
 
 \section{Web - Application development}
 
 In acest capitol vom descrie modul in care a fost dezvoltat aplicatia suprinzand principale algoritmi folosinti. 
-Continund cu  detalile de implementare care au contribuit la acesta aplicatie.
+Continund cu detalile de implementare care au contribuit la acesta aplicatie.
 
 
 
@@ -109,7 +223,6 @@ a correct manner by showing Range of Motion (ROM) in real time and after allowin
  count the number of movements. 
  
 It is based on exercices, because we think that a constant and correct number of movements could be more efficient for patients then just to present them what exercices they need to do. In this manner the application guides each patient during the all period they need to follow their treatment. 
-
 
 \subsection{Analysis and design}
 
@@ -132,18 +245,8 @@ MobileNet este o arhitectura optimizata pentru a rula pe dispozitive fara putere
 In articolul " Mobilenets:  Efficient  convolutional  neuralnetworks for mobile vision applications"  \cite{DBLP:journals/corr/HowardZCKWWAA17} sunt descrise principale optimizare aduse de arhitectura numit MobileNet.
 Cea mai importanta optimizare de performanta a fost realizata prin introducerea unui nou tip de strat, numit Depthwise Separable Convolution. Acest strat inlocuieste convolutila standard. Si mare diferenta este ca a impartit in doi pasi separati, aplicarea filtrari si combinarea.
 
-
- \begin{figure}[htbp]
-	\centerline{\includegraphics[scale=0.7]{fig/demo-mykineto.png}}  
-	\caption{Demo MyKineto}
-	\label{fig:demo-web-mykineto}
-\end{figure}
- 
-
-
 Pe baza keypoints obtinute de la PoseNet vom desena unghiurile dintre membrele pacientului folosind canvas.
 Unghiul dintre doua drepte va fi calculat folosind formula matematica, reprezentand range of motion.
-
 
 Pentru a numara numarul de exerciti corecte vom folosi un algoritm bazat pe unghiuri pentru fiecare tip de exercitiu.
 
@@ -154,7 +257,15 @@ De exemplu daca se fac squats atunci algoritmul va functiona pe baza de stari, a
 \end{itemize}
 
 Pe baza acestor doua stari, vom numara numarul de exerciti facute corect din puncte de vedere a unghiului genunchiului.
-In Figura \ref{fig:demo-web-mykineto} se poate vedea cum algoritmul numara numarul de repetari corecte.
+
+ \begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.7]{fig/demo-mykineto.png}}  
+	\caption{Demo MyKineto}
+	\label{fig:demo-web-mykineto}
+\end{figure}
+
+In Figura \ref{fig:demo-web-mykineto} se poate vedea cum algoritmul numara numarul de repetari corecte si
+afiseaza punctele detectate in timp real de algoritm folosind canvas.
 
 
 
@@ -193,7 +304,29 @@ Acest lucra face ca algoritmi sa ruleze pe GPU \cite{tensorflow.js}.
 
 Pe lângă asta, pentru dezvoltarea aplicație s-a folosit typescript care este un super set tipizat a lui javascript și mediul de dezvoltare Visual Studio Code.
 
-
 \section{Experimental results}
 
+In urma implementari celor doua variante de mai sus am facute mai multe teste legate de performanta algoritmilor.
+Mai exact cat de repede ruleaza algoritmul de pose estimation pe o imagine. Cu cat ruleaza mai repede cu atata optinem o performanta mai buna, targul nostru find de 30 frame per seconds.
+
+
+ \begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.7]{fig/mobile-performace.png}}  
+	\caption{The performance of the pose estimation algorithm run on two devices with optimized and non-optimized model.}
+	\label{fig:mobile-perf}
+\end{figure}
+
+In Figura \ref{fig:mobile-perf} putem observa o create cu 50\% a performantei in cazul modelul optimizat pentru aplicatie mobila.
+
+In cazul aplicatie web, lucrurile stau un pic diferit. Am incerc sa fac o comparatie intre rularea algoritmului pe client sau pe server. Se poate observa clar din figura \ref{fig:web-perf} ca varianta cu servarul se exclude doarece ori cat ar fi servarul de bun durata requestului dureaza in medie 50 ms doarece se trimit un numar mare de date.
+
+
+ \begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.7]{fig/web-performace.png}}  
+	\caption{The performance of the pose estimation algorithm run on web}
+	\label{fig:web-perf}
+\end{figure}
+
 \section{Possible extensions}
+
+
