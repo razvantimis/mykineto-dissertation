@@ -48,7 +48,7 @@ The study contributes to computer vision applications such as smart photo editin
         \item train network to predict instance-agnostic semantic person segmentation maps
         \item for every person pixel we also predict a set vectors to each of the K keypoints of the corresponding person instance. (corresponding vectors fields can be thought as a geometric embedding representation and induce basins of attraction around each person instance, leading to an efficient association algorithm)
          \begin{itemize}
-         \item For each pixel xi, they predict the locations of all K keypoints for the corresponding person that xi belongs to
+         \item For each pixel $x_i$, they predict the locations of all K keypoints for the corresponding person that $x_i$ belongs to
          \item then compare this to all candidate detected people j (in terms of average keypoint distance), weighted by the keypoint detection probability 
          \item if this distance is low enough, we assign pixel i to person j
 
@@ -100,8 +100,8 @@ Training data: standard COCO keypoint dataset \cite{coco2016}, which annotates m
 
 \subsection{Performance and comparisons}
 \begin{itemize}
-    \item average precision of 0.649 on the COCO test-dev set and the 0.643 test-standard sets, outperforming the winner of the 2016 COCO keypoints challenge and other recent state-of-art
-    \item using additional in-house labeled data we obtain an even higher average precision of 0.685 on the test-dev set and 0.673 on the test-standard set, more than 5\% absolute improvement compared to the previous best performing method on the same dataset
+    \item average precision of 0.649 on the COCO test-dev set and the 0.643 test-standard sets, outperforming the winner of the 2016 COCO keypoints challenge and other recent state-of-art.
+    \item using additional in-house labeled data we obtain an even higher average precision of 0.685 on the test-dev set and 0.673 on the test-standard set, more than 5\% absolute improvement compared to the previous best performing method on the same dataset.
 
 \end{itemize}
 
@@ -111,9 +111,7 @@ Training data: standard COCO keypoint dataset \cite{coco2016}, which annotates m
 \cite{DBLP:journals/corr/CaoSWS16}}
 
 \subsection{Problem}
-\par The purpose is to recognize a layout of the body parts, based on the pose estimation and Pose Affinity Fields (PAF)
-
-
+\par The purpose is to recognize a layout of the body parts, based on the pose estimation and Pose Affinity Fields (PAF).
 
 \subsection{Methods}
  \begin{itemize}
@@ -122,7 +120,7 @@ Training data: standard COCO keypoint dataset \cite{coco2016}, which annotates m
  \end{itemize}
 \begin{figure}[htbp]
 	\centerline{\includegraphics[scale=0.25]{fig/algoritm-ann.png}}  
-	\caption{Overall pipeline}
+	\caption{Overall pipeline \cite{DBLP:journals/corr/CaoSWS16}}
 \end{figure}
 
 \subsection{Data}

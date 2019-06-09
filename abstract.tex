@@ -1,7 +1,7 @@
 \begin{abstract}
 \begin{comment}
 
-Scopul acestei lucrări este de a obține rapoarte privind progresul pacienților bazate pe algoritmi inteligenți de estimare a posibilei care să motiveze pacientul să continue recuperarea medicală.
+Scopul acestei lucrări este de a obține rapoarte privind progresul pacienților bazate pe algoritmi inteligenți de estimare a pozitie care să motiveze pacientul să continue recuperarea medicală.
 
 Majoritatea pacienților necesită recuperare medicală pe termen lung, ceea ce înseamnă o medie de 2 sau 3 ani, renunțarea în timpul perioadei de recuperare deoarece nu văd rezultatele chiar dacă acestea există, acestea nu sunt evidente cu ochiul liber.
 Mai îngrijorător este faptul că până la 70\% dintre pacienți renunță la fizioterapie, deoarece nu pot vedea rezultate imediate.
@@ -20,7 +20,7 @@ In acest sens am ales utilizarea in doua aplicati separate a acestor arhitecturi
 
 O aplicatie mobila pentru urmarirea progresului pacientului in timp real folosind camera telefonului. 
 Acesta va face fiecare exercitu in fata camerai si va primit raporte legate de performantele lui pe zile.
-Performantele insemnand distantele parcurse in timpul exercitiului de membrele acestuia.
+Performantele insemnand distantele parcurse in timpul exercitiului de membrele copului.
 
 
 Aplicatie web care va calcula Range of Motion pentru a ajuta pacientul sa faca corect exercitile, astfel vom numara numarul de repatari corecte pe baza unghiurilor care le optine pacientul in timpul exercitiului.
@@ -31,7 +31,7 @@ Am obtinut o performata medie de 20 FPS pentru MobileNet in comparatie cu Convol
 
 \end{comment}
 
-\par The goal of this paper is to obtain reports on patient progress based on intelligent pose estimation  algorithms motivate the patient to continue medical recovery.
+\par The goal of this paper is to obtain reports on patient progress based on intelligent pose estimation  algorithms to motivate the patient to continue medical recovery.
 \par Most patients require long-term medical recovery, which means an average of 2 or 3 years, give up during the recovery period because they do not see results even if they exist, they are not obvious to the naked eye.
 More worrying is that up to 70\% of patients give up physiotherapy because they can not see immediate results.
 
@@ -39,21 +39,23 @@ Our solution consists of making two prototypes demonstrating the ability of thes
 
 The main problem is low performance because it requires a large amount of computing.
 The objective is to run algorithms at a performance of 30 frames per second on the end-user device.
-Next, we studied two important architectures in pose estimation.
+Next, we studied two important architectures in pose estimation:
+\begin{itemize}
+    \item MobileNet is optimized for mobile, reducing the number of calculations through special architecture \cite{DBLP:journals/corr/HowardZCKWWAA17}.
+    \item Convolutional pose machines that specializes in pose estimation, having a composite structure of several classifiers \cite{DBLP:journals/corr/WeiRKS16}.
+\end{itemize}
 
-MobileNet is optimized for mobile, reducing the number of calculations through special architecture \cite{DBLP:journals/corr/HowardZCKWWAA17}.
 
-Convolutional pose machines that specializes in pose estimation, having a composite structure of several classifiers \cite{DBLP:journals/corr/WeiRKS16}.
 
 In this regard, we have chosen to use two separate applications of these architectures, observing the performance and accuracy of the estimates.
 
 The mobile application for tracking patient progress in real time using the camera phone.
 He will do each exercise in front of the camera and receive reports related to his performance on days.
-The performances are the distances traveled during the exercise by its members.
+The performances are the distances traveled during the exercise by its body members.
 
 The web application will calculate a range of motion to help the patient perform the correct exercises, so we will count the correct number of repetitions of an exercise based on the angles that help the patient during the exercise.
 
-Following the implementation of the two variants, we discovered that the network architecture presented in the paper with name Convolutional pose machines \cite{DBLP:journals/corr/WeiRKS16} is more powerful and accurate than the web implementation using the MobileNet architecture, which is not particularly optimized for the pose estimation problem.
+Following the implementation of the two variants, we discovered that the network architecture presented in the article, Convolutional pose machines \cite{DBLP:journals/corr/WeiRKS16}, is more powerful and accurate than the web implementation using the MobileNet architecture, which is not particularly optimized for the pose estimation problem.
 
 
 This work is the result of my own activity. I have neither given nor
