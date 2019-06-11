@@ -1,8 +1,41 @@
 
 \chapter{Conclusion}
-\par Proposed system for the tracking of the posture doesn\mbox{'}t perform as we originally expected.
-\par There seems to be some problems regarding the determination of the bounding box, maybe due to the fact that the detected points are on a surface that is characterized by just a few colors that appear in almost all tracked region. Because of these characteristics of the tracked posture we fail to track enough points due to insufficient difference in the nearest proximity of a point. 
 
-\par For future development we will try to adapt described system to track the contours.
+% In acaesta lucram am prezentat doua abordari prin care putem integra inteligenta artificiala in recuperarea medicala. 
+In this paper we presented two approaches through which we can integrate artificial intelligence into medical recovery.
 
-\par Even if posture tracking system doesn\mbox{'}t perform as we expected, we succeeded in the finding the appropriate settings for the PoseNet so that it performs enough good for the determination of the ranges of motion. Based on these calculations we were able to count, in real time, the number of exercises that user made.
+% La baza ambelor abordari este utilizata o reatea neuronala de convolutie special antrenata in pose estimation.
+ At the basis of both approaches, a convolution neural network  is used in the pose estimation.
+ 
+ 
+%  Pentru a îmbunătății performanțele aplicatilor am optimizat modelul invatat astfel incat sa ruleze pe GPU.
+To improve application performance, we optimized the model to run on the GPU.
+%  In cazul aplicatie mobile am utilizat o librarie numite MACE, scrisa in C++, care ofera capabilitatea modelului de a rula pe GPU la o performanta maxima.
+In the case of the mobile application, we used a framework called MACE, written in C ++, which offers the capability of the model to run on the GPU at maximum performance.
+%  Iar in cazul aplicatie web am ales sa folosim tensorflow.js care permite rularea pe GPU in browser .
+And in the case of the web application, we chose to use tensorflow.js to run on the GPU in the browser.
+% Astfel in ambele cazuri performanta obtinuta a fost una satisfacatoare. Pentru aplicatie mobile avem o performanta intre 30 si 50 de FPS iar pentru cea web intre 15 si 25 de FPS.
+
+In both cases, the performance was satisfactory. For mobile application, we have a performance between 30 and 50 FPS and for the web between 15 and 25 FPS.
+ 
+% Aceasta performanta ne-a permis integrarea acestor algoritmii in aplicatie care pot  motiva pacienti sa continue recuperarea medicala.
+ This performance allowed us to integrate these algorithms into the application that can motivate patients to continue their medical recovery.
+ 
+%  Lucrarea este structurata pe 5 capitole.
+The paper is structured in 5 chapters.
+%  Primul capitol prezinta o vede generala asupra recuperari medicale si a algoritmilor de pose estimation.
+The first chapter presents a general view on medical recovery and pose estimation algorithms.
+% Capitolul 2 vorbim despre conceptele de bază care sunt folosite de algoritmi de pose estimation, incepem cu retelele neuronale si ajungem la cele de convolutie.
+Chapter 2 talks about the basic concepts that are used by pose estimation algorithms, we start with neural network and continue with convolution neural network.
+% Capitolul 3 prezinta abordari inrudite in implementarea algoritmilor de pose estimation.
+Chapter 3 presents related approaches to implementing the pose estimation algorithms.
+%  Capitolul 4 este dedicat analizei si detalieri modului de implementare a celor doua aplicatie,
+%  aplicatie web care calculeaza Range of Motion pentru a ajuta pacientul sa faca corect exercitile
+%  si cea mobile care urmareste progresul pacientului in timp ce isi face programul de recuperare.
+ Chapter 4 is dedicated to analyzing and  explaining how to implement the web and the mobile application. 
+Web application calculate the range of motion to help the patient to do the right exercises.
+ Mobile aplication track the progress of the patient while doing their recovery program.
+ 
+%  Pe viitor ne gandim sa unificam cele doua aplicatie si sa optimizam mai multe algoritmi de pose estimation pentru a fi capabil de performate remarcabile pe orice dispozitiv. Deasemenea ne propunem extindem aplicatie un una mai complexe si sa includem o varianta care sa vina in ajutorul copiilor.
+
+In the future, we plan to unify the two applications and optimize pose estimation algorithms to be able to perform on any device. We also want to extend the application to a more complex one and to include a variant that will help children.
